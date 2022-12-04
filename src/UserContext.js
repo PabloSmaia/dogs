@@ -37,7 +37,7 @@ export const UserStorage = ({ children }) => {
       setLoading(true);
       const { url, options } = TOKEN_POST({ username, password });
       const tokenRes = await fetch(url, options);
-      if (!tokenRes.ok) throw new Error(`Error ${tokenRes.statusText}`);
+      if (!tokenRes.ok) throw new Error(`Conta não é valida`);
       const { token } = await tokenRes.json();
       window.localStorage.setItem('token', token);
       await getUser(token);
@@ -66,6 +66,8 @@ export const UserStorage = ({ children }) => {
         } finally {
           setLoading(false);
         }
+      } else {
+        setLogin(false);
       }
     }
     autoLogin();
