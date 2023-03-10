@@ -3,7 +3,8 @@ import { PHOTOS_GET } from '../../api';
 import useFetch from '../../Hooks/useFetch';
 import Error from '../Helper/Error';
 import Loading from '../Helper/Loading';
-import FeedPhotoItem from './FeedPhotoItem';
+import FeedPhotoItem from './FeedPhotoItem'; 
+import styles from './FeedPhoto.module.css'
 
 const FeedPhotos = () => {
   const { data, loading, error, request } = useFetch();
