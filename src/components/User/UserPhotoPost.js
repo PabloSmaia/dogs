@@ -7,6 +7,7 @@ import Button from '../form/Button';
 import Input from '../form/Input';
 import Error from '../Helper/Error';
 import styles from './UserPhotoPost.module.css';
+import Head from '../Helper/Head';
 
 const UserPhotoPost = () => {
   const peso = useForm();
@@ -17,7 +18,7 @@ const UserPhotoPost = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    if (data) navigate('./conta');
+    if (data) navigate('/conta');
   }, [data, navigate]);
 
   function handleSubmit(event) {
@@ -42,6 +43,7 @@ const UserPhotoPost = () => {
 
   return (
     <section className={`${styles.photoPost} animeLeft`}>
+      <Head title="poste a sua foto" />
       <form onSubmit={handleSubmit}>
         <Input label="None" type="text" name="nome" {...nome} />
         <Input label="Peso" type="text" name="peso" {...peso} />

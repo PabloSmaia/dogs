@@ -11,17 +11,13 @@ export const UserStorage = ({ children }) => {
   const [error, setError] = React.useState(null);
   const navigate = useNavigate();
 
-  const userLogout = React.useCallback(
-    async function () {
-      setData(null);
-      setError(null);
-      setLoading(false);
-      setLogin(false);
-      window.localStorage.removeItem('token');
-      navigate('/login');
-    },
-    [navigate],
-  );
+  const userLogout = React.useCallback(async function () {
+    setData(null);
+    setError(null);
+    setLoading(false);
+    setLogin(false);
+    window.localStorage.removeItem('token');
+  }, []);
 
   async function getUser(token) {
     const { url, options } = USER_GET(token);
@@ -37,14 +33,14 @@ export const UserStorage = ({ children }) => {
       setLoading(true);
       const { url, options } = TOKEN_POST({ username, password });
       const tokenRes = await fetch(url, options);
-      if (!tokenRes.ok) throw new Error(`Conta não é valida`);
+      if (!tokenRes.ok) throw new Error(`Error: ${tokenRes.statusText}`);
       const { token } = await tokenRes.json();
       window.localStorage.setItem('token', token);
       await getUser(token);
       navigate('/conta');
     } catch (err) {
       setError(err.message);
-      setLoading(false);
+      setLogin(false);
     } finally {
       setLoading(false);
     }
